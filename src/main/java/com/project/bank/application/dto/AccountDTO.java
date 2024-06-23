@@ -5,7 +5,7 @@ public record AccountDTO (
 
         double balance,
 
-        boolean overdraft,
+        String accountType,
 
         long overdraftAuth
 ) {

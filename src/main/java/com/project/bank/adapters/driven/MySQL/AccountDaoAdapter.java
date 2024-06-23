@@ -18,20 +18,19 @@ public class AccountDaoAdapter implements AccountDAO {
     @Override
     public Account getAccountById(long id) {
         AccountEntity accountEntity = (accountRepository.findById(id)).orElse(null);
-        return new Account(accountEntity.id(),accountEntity.balance(), accountEntity.overdraft(), accountEntity.overdraftAuth());
+        return new Account(accountEntity.id(),accountEntity.balance(), accountEntity.accountType(), accountEntity.overdraftAuth());
     }
 
     @Override
     public void createAccount(AccountDTO accountDTO) {
-        AccountEntity accountEntity = new AccountEntity(accountDTO.id(),accountDTO.balance(),accountDTO.overdraft(),accountDTO.overdraftAuth());
+        AccountEntity accountEntity = new AccountEntity(accountDTO.id(),accountDTO.balance(),accountDTO.accountType(),accountDTO.overdraftAuth());
         accountRepository.save(accountEntity);
     }
 
     @Override
     public void manageOverdraft(long id, Map<String, Object> body) {
-        boolean overdraft = (boolean) body.get("overdraft");
         double overdraft_auth = (double) body.get("overdraftAuth");
-        accountRepository.manageOverdraft(id, overdraft, overdraft_auth);
+        accountRepository.manageOverdraft(id, overdraft_auth);
     }
 
     @Override

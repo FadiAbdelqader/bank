@@ -9,8 +9,8 @@ import org.springframework.data.repository.query.Param;
 public interface AccountRepository extends CrudRepository<AccountEntity,Long> {
 
     @Modifying
-    @Query("update accounts a set a.overdraft = :overdraft, a.overdraft_auth = :overdraft_auth where a.id = :accountId")
-    void manageOverdraft(@Param("accountId") long id, boolean overdraft, double overdraft_auth);
+    @Query("update accounts a set a.overdraft_auth = :overdraft_auth where a.id = :accountId")
+    void manageOverdraft(@Param("accountId") long id, double overdraft_auth);
 
     @Modifying
     @Query("update accounts a set a.balance = :newBalance where a.id = :accountId")

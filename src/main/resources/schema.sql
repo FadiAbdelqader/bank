@@ -5,7 +5,7 @@ use bank_exalt;
 create table accounts (
     id int primary key not null auto_increment,
     balance integer,
-    overdraft integer,
+    account_type varchar(50),
     overdraft_auth decimal
     );
 
@@ -15,11 +15,5 @@ CREATE TABLE transfers (
     date DATE,
     account_id int,
     FOREIGN KEY (account_id) REFERENCES accounts(id)
-);
-
-create table saving_accounts (
-    id int primary key not null auto_increment,
-    balance double,
-    saving_limit double
 );
 

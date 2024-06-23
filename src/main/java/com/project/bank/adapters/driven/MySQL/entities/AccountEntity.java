@@ -10,7 +10,7 @@ public record AccountEntity(
 
         double balance,
 
-        boolean overdraft,
+        String accountType,
 
         long overdraftAuth
 ) {

@@ -26,13 +26,13 @@ public class TransferUsecases {
             Account account = accountUsecase.getAccountById((int) transferDTO.account_id());
             double balance = account.balance();
             double withdrawAmount = transferDTO.amount();
-            if(balance + withdrawAmount < 0 && account.overdraft()){
+            if(balance + withdrawAmount < 0 && account.overdraftAuth() > 0){
                 if(Math.abs(balance + withdrawAmount) > Math.abs(account.overdraftAuth()) ) {
                     throw new OverdraftExceededException("Overdraft exceeded.");
                 } else {
                     transferDAO.transfer(transferDTO);
                 }
-            } else if (balance + withdrawAmount < 0 && !account.overdraft()) {
+            } else if (balance + withdrawAmount < 0 && account.overdraftAuth() == 0) {
                 throw new OverdraftNotAuthorizedException("Overdraft not authorized.");
             } else {
                 transferDAO.transfer(transferDTO);

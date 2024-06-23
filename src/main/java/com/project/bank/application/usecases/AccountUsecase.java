@@ -17,16 +17,6 @@ public class AccountUsecase {
     private final AccountDAO accountDAO;
 
     public void createAccount(AccountDTO accountDTO) throws AccountAlreadyExistsException {
-        /*
-        System.out.println("dto : " + accountDTO.id());
-        if(accountDAO.getAccountById(accountDTO.id()) != null){
-            throw new AccountAlreadyExistsException("Account already exists");
-        } else {
-            System.out.println("dans le else");
-            accountDAO.createAccount(accountDTO);
-        }
-        */
-
         accountDAO.createAccount(accountDTO);
     }
 
